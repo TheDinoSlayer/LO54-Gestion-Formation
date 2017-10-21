@@ -7,7 +7,7 @@ package fr.utbm.td.formation;
 
 /**
  *
- * @author agontier
+ * @author ag
  */
 public class bidon {
     
