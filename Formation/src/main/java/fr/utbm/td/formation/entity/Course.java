@@ -6,15 +6,21 @@
 package fr.utbm.td.formation.entity;
 
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author ag
  */
+@Entity
+@Table(name = "COURSE")
 public class Course {
 
-    String code;
-    String title;
+    private String code;
+    private String title;
 
     public Course() {
     }
@@ -24,6 +30,8 @@ public class Course {
         this.title = title;
     }
 
+    @Id
+    @Column(name = "CODE", nullable = false, length = 4)
     public String getCode() {
         return code;
     }
@@ -32,6 +40,7 @@ public class Course {
         this.code = code;
     }
 
+    @Column(name = "TITLE", nullable = false, length = 50)
     public String getTitle() {
         return title;
     }

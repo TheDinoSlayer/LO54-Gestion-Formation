@@ -6,15 +6,22 @@
 package fr.utbm.td.formation.entity;
 
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author ag
  */
+@Entity
+@Table(name = "LOCATION")
 public class Location {
 
-    int id;
-    String city;
+    private int id;
+    private String city;
 
     public Location() {
     }
@@ -24,6 +31,9 @@ public class Location {
         this.city = city;
     }
 
+    @Id
+    @GeneratedValue
+    @Column(name = "ID")
     public int getId() {
         return id;
     }
@@ -32,6 +42,7 @@ public class Location {
         this.id = id;
     }
 
+    @Column(name = "CITY", nullable = false, length = 30)
     public String getCity() {
         return city;
     }

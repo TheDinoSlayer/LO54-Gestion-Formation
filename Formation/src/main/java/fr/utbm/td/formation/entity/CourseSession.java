@@ -7,18 +7,27 @@ package fr.utbm.td.formation.entity;
 
 import java.util.Date;
 import java.util.Objects;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author ag
  */
+@Entity
+@Table(name = "COURSE_SESSION")
 public class CourseSession {
 
-    int id;
-    Date startDate;
-    Date endDate;
-    Course course;
-    Location location;
+    private int id;
+    private Date startDate;
+    private Date endDate;
+    private Course course;
+    private Location location;
 
     public CourseSession() {
     }
@@ -31,6 +40,9 @@ public class CourseSession {
         this.location = location;
     }
 
+    @Id
+    @GeneratedValue
+    @Column(name = "ID")
     public int getId() {
         return id;
     }
@@ -39,6 +51,7 @@ public class CourseSession {
         this.id = id;
     }
 
+    @Column(name = "START_DATE", nullable = false)
     public Date getStartDate() {
         return startDate;
     }
@@ -47,6 +60,7 @@ public class CourseSession {
         this.startDate = startDate;
     }
 
+    @Column(name = "END_DATE", nullable = false)
     public Date getEndDate() {
         return endDate;
     }
@@ -55,6 +69,7 @@ public class CourseSession {
         this.endDate = endDate;
     }
 
+    @ManyToOne
     public Course getCourse() {
         return course;
     }
@@ -63,6 +78,7 @@ public class CourseSession {
         this.course = course;
     }
 
+    @ManyToOne
     public Location getLocation() {
         return location;
     }

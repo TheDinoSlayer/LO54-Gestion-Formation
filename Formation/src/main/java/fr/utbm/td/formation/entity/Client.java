@@ -6,20 +6,28 @@
 package fr.utbm.td.formation.entity;
 
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author ag
  */
+@Entity
+@Table(name = "CLIENT")
 public class Client {
 
-    int id;
-    String lastName;
-    String firstName;
-    String address;
-    String phone;
-    String email;
-    CourseSession courseSession;
+    private int id;
+    private String lastName;
+    private String firstName;
+    private String address;
+    private String phone;
+    private String email;
+    private CourseSession courseSession;
 
     public Client() {
     }
@@ -34,6 +42,9 @@ public class Client {
         this.courseSession = courseSession;
     }
 
+    @Id
+    @GeneratedValue
+    @Column(name = "ID")
     public int getId() {
         return id;
     }
@@ -42,6 +53,7 @@ public class Client {
         this.id = id;
     }
 
+    @Column(name = "LASTNAME", nullable = false, length = 20)
     public String getLastName() {
         return lastName;
     }
@@ -50,6 +62,7 @@ public class Client {
         this.lastName = lastName;
     }
 
+    @Column(name = "FIRSTNAME", nullable = false, length = 20)
     public String getFirstName() {
         return firstName;
     }
@@ -58,6 +71,7 @@ public class Client {
         this.firstName = firstName;
     }
 
+    @Column(name = "ADDRESS", nullable = false, length = 30)
     public String getAddress() {
         return address;
     }
@@ -66,6 +80,7 @@ public class Client {
         this.address = address;
     }
 
+    @Column(name = "PHONE", nullable = false, length = 15)
     public String getPhone() {
         return phone;
     }
@@ -74,6 +89,7 @@ public class Client {
         this.phone = phone;
     }
 
+    @Column(name = "EMAIL", nullable = true, length = 30)
     public String getEmail() {
         return email;
     }
@@ -82,6 +98,7 @@ public class Client {
         this.email = email;
     }
 
+    @ManyToOne
     public CourseSession getCourseSession() {
         return courseSession;
     }
