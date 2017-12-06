@@ -16,7 +16,7 @@ import org.hibernate.Session;
  *
  * @author ag
  */
-public class HibernateCourseSession {
+public class CourseSessionDAO {
 
     public List<CourseSession> getCoursesSessions(String title, String city, Date startDate, Date endDate) {
         Session session = HibernateUtil.getSessionFactory().openSession();

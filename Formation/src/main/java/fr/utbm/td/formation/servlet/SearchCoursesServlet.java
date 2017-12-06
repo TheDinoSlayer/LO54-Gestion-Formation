@@ -8,7 +8,6 @@ package fr.utbm.td.formation.servlet;
 import fr.utbm.td.formation.entity.Location;
 import fr.utbm.td.formation.service.LocationService;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,8 +20,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ag
  */
-@WebServlet(name = "LocationServlet", urlPatterns = {"/location"})
-public class LocationServlet extends HttpServlet {
+@WebServlet(name = "SearchCoursesServlet", urlPatterns = {"/searchcourses"})
+public class SearchCoursesServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,7 +38,7 @@ public class LocationServlet extends HttpServlet {
             LocationService ls = new LocationService();
             List<Location> locations = ls.getLocations();
             request.setAttribute("locations", locations);
-            RequestDispatcher rd = request.getRequestDispatcher("searchcourses.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/searchcourses.jsp");
             rd.forward(request, response);    
     }
 
@@ -69,7 +68,7 @@ public class LocationServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
+        processRequest(request, response);
     }
 
     /**

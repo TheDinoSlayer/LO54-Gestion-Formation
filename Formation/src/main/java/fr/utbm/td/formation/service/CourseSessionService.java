@@ -6,7 +6,7 @@
 package fr.utbm.td.formation.service;
 
 import fr.utbm.td.formation.entity.CourseSession;
-import fr.utbm.td.formation.repository.HibernateCourseSession;
+import fr.utbm.td.formation.repository.CourseSessionDAO;
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +17,7 @@ import java.util.List;
 public class CourseSessionService {
 
     public List<CourseSession> getCoursesSessions(String title, String city, Date startDate, Date endDate) {
-        HibernateCourseSession hcs = new HibernateCourseSession();
-        return hcs.getCoursesSessions(title, city, startDate, endDate);
+        CourseSessionDAO cs = new CourseSessionDAO();
+        return cs.getCoursesSessions(title, city, startDate, endDate);
     }
 }
