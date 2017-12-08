@@ -20,17 +20,27 @@ public class CourseSessionDAO {
 
     public List<CourseSession> getCoursesSessions(String title, String city, Date startDate, Date endDate) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        String requete = "FROM course_session as cs, course as c, location as l "
-                + "INNER JOIN cs.course_code AS c.code "
-                + "INNER JOIN cd.location_id as l.id"
-                + "WHERE c.title = ?, l.city = ?, cs.start_date = ?, cs.end_date = ?";
+        String requete = "FROM CourseSession as cs "
+                //+ "INNER JOIN cs.course c "
+                //+ "INNER JOIN cs.location l "
+                //+ "WHERE cs.course.title LIKE ?";
+                + " AND cs.location.city = ?";
+                //+ "AND cs.startDate >= ? AND cs.endDate <= ?";
+        /*
+        
+        from course as c
+        inner join course_session as cs 
+        on c.code=cs.course_code
+        inner join location as l
+        on cs.location_id = l.id
+        */
         Query query = session.createQuery(requete)
-                .setString(0, title)
-                .setString(1, city)
-                .setParameter(2, startDate)
-                .setParameter(3, endDate);
+                //.setString(0, "%"+title+"%");
+                .setString(0, city);
+                //.setParameter(2, startDate)
+                //.setParameter(3, endDate);
 
-        session.close();
+        //session.close();
         return query.list();
     }
 }

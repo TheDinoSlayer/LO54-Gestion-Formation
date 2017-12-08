@@ -13,14 +13,14 @@
         <title>Recherche de cours</title>
     </head>
     <body>
-        <form>
-            Titre : <input type="text" name="title"/><br>
+        <form action="/formation/searchcourses" method="post">
+            Formation : <input type="text" name="title" value="${title}"/><br>
             Date : <input type="date" name="date"/><br>
             Lieu : 
             <select name="location">
                 <option value=""></option>
                 <c:forEach items="${locations}" var="l">
-                    <option value="${l.id}">${l.city}</option>
+                    <option value="${l.city}">${l.city}</option>
                 </c:forEach>
             </select><br>
             Heure début : <input type="time" name="startHour"/><br>
@@ -36,6 +36,16 @@
                 <th>Date de début</th>
                 <th>Date de fin</th>
             </tr>
+            <c:forEach items="${courseSessions}" var="cs">
+                <tr>
+                    <td>${cs.course.code}</td>
+                    <td>${cs.course.title}</td>
+                    <td>${cs.location.city}</td>
+                    <td>${cs.startDate}</td>
+                    <td>${cs.endDate}</td>
+                    <td><button formtarget="/formation/registercourses" value="${cs.id}">S'inscrire</button></td>
+                </tr>
+            </c:forEach>
         </table>
     </body>
 </html>
