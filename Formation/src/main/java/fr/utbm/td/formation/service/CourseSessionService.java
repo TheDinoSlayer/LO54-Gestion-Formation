@@ -16,6 +16,11 @@ import java.util.List;
  */
 public class CourseSessionService {
 
+    public CourseSession getCourseSessionByID(int id) {
+        CourseSessionDAO cs = new CourseSessionDAO();
+        return cs.getCourseSessionByID(id);
+    }
+    
     public List<CourseSession> getCoursesSessions(String title, String city, Date startDate, Date endDate) {
         CourseSessionDAO cs = new CourseSessionDAO();
         return cs.getCoursesSessions(title, city, startDate, endDate);

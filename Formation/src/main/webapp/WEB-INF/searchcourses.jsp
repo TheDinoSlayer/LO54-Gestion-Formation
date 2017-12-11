@@ -35,6 +35,7 @@
                 <th>Lieu</th>
                 <th>Date de début</th>
                 <th>Date de fin</th>
+                <th> </th>
             </tr>
             <c:forEach items="${courseSessions}" var="cs">
                 <tr>
@@ -43,7 +44,11 @@
                     <td>${cs.location.city}</td>
                     <td>${cs.startDate}</td>
                     <td>${cs.endDate}</td>
-                    <td><button formtarget="/formation/registercourses" value="${cs.id}">S'inscrire</button></td>
+                    <td>
+                        <form action="/formation/registercourses">
+                            <button type="submit" value="${cs.id}" name="course">S'inscrire</button>
+                        </form>
+                    </td>
                 </tr>
             </c:forEach>
         </table>

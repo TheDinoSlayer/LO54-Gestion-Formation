@@ -13,7 +13,7 @@
     </head>
     <body>
         <form>
-            Formation : <input type="text" name="formation" readonly/><br>
+            Formation : <input type="text" name="formation" value="${courseSession.course.title}" readonly/><br>
             Nom : <input type="text" name="lastname" required/><br>
             Prénom : <input type="text" name="forename" required/><br>
             Adresse : <input type="text" name="address" required/><br>

@@ -5,6 +5,8 @@
  */
 package fr.utbm.td.formation.servlet;
 
+import fr.utbm.td.formation.entity.CourseSession;
+import fr.utbm.td.formation.service.CourseSessionService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -35,6 +37,12 @@ public class RegisterCoursesServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            int idCourse = Integer.parseInt(request.getParameter("course"));
+            CourseSessionService csService = new CourseSessionService();
+            CourseSession cs = csService.getCourseSessionByID(idCourse);
+
+            request.setAttribute("courseSession", cs);
+            
             RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/registercourse.jsp");
             rd.forward(request, response);
         }

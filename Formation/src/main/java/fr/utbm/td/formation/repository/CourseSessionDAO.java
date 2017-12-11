@@ -9,6 +9,7 @@ import fr.utbm.td.formation.entity.CourseSession;
 import fr.utbm.td.formation.util.HibernateUtil;
 import java.util.Date;
 import java.util.List;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -18,27 +19,34 @@ import org.hibernate.Session;
  */
 public class CourseSessionDAO {
 
+    public CourseSession getCourseSessionByID(int id) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        CourseSession cs = null;
+        try {
+            cs = (CourseSession) session.get(CourseSession.class, id);
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        } finally {
+            if(session != null) {
+                session.close();
+            }
+        }
+        return cs;
+    }
+    
     public List<CourseSession> getCoursesSessions(String title, String city, Date startDate, Date endDate) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         String requete = "FROM CourseSession as cs "
-                //+ "INNER JOIN cs.course c "
-                //+ "INNER JOIN cs.location l "
-                //+ "WHERE cs.course.title LIKE ?";
-                + " AND cs.location.city = ?";
-                //+ "AND cs.startDate >= ? AND cs.endDate <= ?";
-        /*
+                + "WHERE cs.course.title LIKE ? "
+                + "AND cs.location.city = ? "
+                + "AND cs.startDate >= ? "
+                + "AND cs.endDate <= ?";
         
-        from course as c
-        inner join course_session as cs 
-        on c.code=cs.course_code
-        inner join location as l
-        on cs.location_id = l.id
-        */
         Query query = session.createQuery(requete)
-                //.setString(0, "%"+title+"%");
-                .setString(0, city);
-                //.setParameter(2, startDate)
-                //.setParameter(3, endDate);
+                .setString(0, "%"+title+"%")
+                .setString(1, city)
+                .setParameter(2, startDate)
+                .setParameter(3, endDate);
 
         //session.close();
         return query.list();
