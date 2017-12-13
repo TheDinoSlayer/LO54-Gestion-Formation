@@ -42,6 +42,15 @@ public class Client {
         this.courseSession = courseSession;
     }
 
+    public Client(String lastName, String firstName, String address, String phone, String email, CourseSession courseSession) {
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
+        this.courseSession = courseSession;
+    }
+
     @Id
     @GeneratedValue
     @Column(name = "ID")
