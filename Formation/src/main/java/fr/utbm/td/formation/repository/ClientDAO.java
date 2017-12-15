@@ -8,6 +8,7 @@ package fr.utbm.td.formation.repository;
 import fr.utbm.td.formation.entity.Client;
 import fr.utbm.td.formation.util.HibernateUtil;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 /**
@@ -36,5 +37,13 @@ public class ClientDAO {
                 session.close();
             }
         }
+    }
+    
+    public Client getLastClient() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        String requete = "from Client as c order by c.id DESC";
+        Query query = session.createQuery(requete);
+        query.setMaxResults(1);
+        return (Client) query.uniqueResult();
     }
 }

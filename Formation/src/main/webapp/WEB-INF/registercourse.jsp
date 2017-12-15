@@ -12,14 +12,14 @@
         <title>Inscription au cours</title>
     </head>
     <body>
-        <form>
-            Formation : <input type="text" name="formation" value="${courseSession.course.title}" readonly/><br>
+        <form action="/formation/addclient">
+            Formation : <input type="text" value="${courseSession.course.title}" readonly/><br>
             Nom : <input type="text" name="lastname" required/><br>
-            Prénom : <input type="text" name="forename" required/><br>
+            Prénom : <input type="text" name="firstname" required/><br>
             Adresse : <input type="text" name="address" required/><br>
             Téléphone : <input type="tel" name="phone" required pattern="[0-9]{10}"/><br>
             E-mail : <input type="email" name="email"/><br>
-            <input type="submit" value="Inscription"/><br>
+            <button type="submit" value="${courseSession.id}" name="course">Inscription</button><br>
         </form>
     </body>
 </html>
