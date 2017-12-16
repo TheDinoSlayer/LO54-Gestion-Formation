@@ -36,9 +36,9 @@ public class AddClientOkServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         ClientService cService = new ClientService();
         Client c = cService.getLastClient();
-        
+
         request.setAttribute("client", c);
-        
+
         RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/addclientok.jsp");
         rd.forward(request, response);
     }

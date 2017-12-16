@@ -35,20 +35,20 @@ public class AddClientServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try {
             /* TODO output your page here. You may use following sample code. */
-            String lastname = request.getParameter("lastname");
             String firstname = request.getParameter("firstname");
+            String lastname = request.getParameter("lastname");
             String address = request.getParameter("address");
             String phone = request.getParameter("phone");
             String email = request.getParameter("email");
             int courseSession = Integer.parseInt(request.getParameter("course"));
-            
+
             ClientService cService = new ClientService();
             cService.registerClient(firstname, lastname, address, phone, email, courseSession);
-            
+
             RequestDispatcher rd = request.getRequestDispatcher("/addclientok");
             rd.forward(request, response);
-            
-        } catch(Exception e) {
+
+        } catch (Exception e) {
             e.printStackTrace();
             //request.setAttribute("exception", e.getMessage());
         }

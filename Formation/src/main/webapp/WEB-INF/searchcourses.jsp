@@ -28,14 +28,14 @@
             <input type="submit" value="Rechercher"/><br>
         </form>
         <br>
-        <table style="width: 100%">
+        <table style="width: 100%" border="1">
             <tr>
                 <th>Code</th>
                 <th>Formation</th>
                 <th>Lieu</th>
                 <th>Date de début</th>
                 <th>Date de fin</th>
-                <th> </th>
+                <th>&nbsp;</th>
             </tr>
             <c:forEach items="${courseSessions}" var="cs">
                 <tr>

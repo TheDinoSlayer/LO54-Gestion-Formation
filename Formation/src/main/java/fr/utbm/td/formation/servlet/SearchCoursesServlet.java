@@ -5,14 +5,17 @@
  */
 package fr.utbm.td.formation.servlet;
 
+import com.sun.glass.ui.SystemClipboard;
 import fr.utbm.td.formation.entity.CourseSession;
 import fr.utbm.td.formation.entity.Location;
 import fr.utbm.td.formation.service.CourseSessionService;
 import fr.utbm.td.formation.service.LocationService;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -74,8 +77,8 @@ public class SearchCoursesServlet extends HttpServlet {
         Date startDate = null;
         Date endDate = null;
         try {
-            startDate = format.parse(date + " " + startHour);
-            endDate = format.parse(date + " " + endHour);
+            startDate = format.parse((!date.isEmpty() ? date : new SimpleDateFormat("yyyy-MM-dd").format(new Date())) + " " + (!startHour.isEmpty() ? startHour : "00:00"));
+            endDate = format.parse((!date.isEmpty() ? date : new SimpleDateFormat("yyyy-MM-dd").format(new Date())) + " " + (!endHour.isEmpty() ? endHour : "23:59"));
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -84,7 +87,7 @@ public class SearchCoursesServlet extends HttpServlet {
         List<CourseSession> courseSessions = cs.getCoursesSessions(title, city, startDate, endDate);
 
         request.setAttribute("courseSessions", courseSessions);
-        
+
         RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/searchcourses.jsp");
         rd.forward(request, response);
     }

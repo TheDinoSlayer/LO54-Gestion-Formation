@@ -9,9 +9,11 @@ import fr.utbm.td.formation.entity.CourseSession;
 import fr.utbm.td.formation.util.HibernateUtil;
 import java.util.Date;
 import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -27,28 +29,37 @@ public class CourseSessionDAO {
         } catch (HibernateException e) {
             e.printStackTrace();
         } finally {
-            if(session != null) {
+            if (session != null) {
                 session.close();
             }
         }
         return cs;
     }
-    
+
     public List<CourseSession> getCoursesSessions(String title, String city, Date startDate, Date endDate) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        String requete = "FROM CourseSession as cs "
-                + "WHERE cs.course.title LIKE ? "
-                + "AND cs.location.city = ? "
-                + "AND cs.startDate >= ? "
-                + "AND cs.endDate <= ?";
         
-        Query query = session.createQuery(requete)
-                .setString(0, "%"+title+"%")
-                .setString(1, city)
-                .setParameter(2, startDate)
-                .setParameter(3, endDate);
+        Criteria criteria = session.createCriteria(CourseSession.class)
+                .createAlias("course", "c")
+                .createAlias("location", "l");
 
-        //session.close();
-        return query.list();
+        if (title != null && !title.isEmpty()) {
+            criteria.add(Restrictions.disjunction().add(Restrictions.like("c.title", "%" + title + "%")));
+        }
+        if (city != null && !city.isEmpty()) {
+            criteria.add(Restrictions.disjunction().add(Restrictions.eq("l.city", city)));
+        }
+        if (startDate != null) {
+            criteria.add(Restrictions.ge("startDate", startDate));
+        }
+        if (endDate != null) {
+            criteria.add(Restrictions.le("endDate", endDate));
+        }
+
+        List<CourseSession> listCS = criteria.list();
+
+        session.close();
+
+        return listCS;
     }
 }

@@ -42,7 +42,7 @@ public class RegisterCoursesServlet extends HttpServlet {
             CourseSession cs = csService.getCourseSessionByID(idCourse);
 
             request.setAttribute("courseSession", cs);
-            
+
             RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/registercourse.jsp");
             rd.forward(request, response);
         }
