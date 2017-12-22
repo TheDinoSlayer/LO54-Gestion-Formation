@@ -5,17 +5,14 @@
  */
 package fr.utbm.td.formation.servlet;
 
-import com.sun.glass.ui.SystemClipboard;
 import fr.utbm.td.formation.entity.CourseSession;
 import fr.utbm.td.formation.entity.Location;
 import fr.utbm.td.formation.service.CourseSessionService;
 import fr.utbm.td.formation.service.LocationService;
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
