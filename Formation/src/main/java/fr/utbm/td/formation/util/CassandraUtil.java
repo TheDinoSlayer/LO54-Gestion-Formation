@@ -13,14 +13,22 @@ import com.datastax.driver.core.Session;
  * @author ag
  */
 public class CassandraUtil {
-
-    public void createKeySpaces() {
-
-        String query = "CREATE KEYSPACE IF NOT EXISTS Formation WITH REPLICATION = {'class': 'SimpleStrategy', 'replication_factor': '1'};";
-        Cluster cluster = Cluster.builder().withClusterName("Cluster 1").addContactPoint("localhost").build();
+    
+    public static void createKeySpaces() {
+        String formation = "CREATE KEYSPACE formation WITH replication = {'class':'SimpleStrategy', 'replication_factor':1}";
+        String table = "CREATE TABLE searchcourse ("
+                + "search_id uuid PRIMARY KEY,"
+                + "keyword_formation text,"
+                + "location text,"
+                + "date text,"
+                + "start_time text,"
+                + "end_time text);";
+        
+        Cluster cluster = Cluster.builder().addContactPoint("localhost").withPort(9042).build();
         Session session = cluster.connect();
-        session.execute(query);
-        session.execute("USE Formation");
-
+        session.execute(formation);
+        session.execute("USE formation;");
+        session.execute(table);
+        cluster.close();
     }
 }

@@ -9,7 +9,9 @@ import fr.utbm.td.formation.entity.CourseSession;
 import fr.utbm.td.formation.entity.Location;
 import fr.utbm.td.formation.service.CourseSessionService;
 import fr.utbm.td.formation.service.LocationService;
+import fr.utbm.td.formation.service.SearchCoursesService;
 import java.io.IOException;
+import java.sql.Time;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -74,11 +76,32 @@ public class SearchCoursesServlet extends HttpServlet {
         Date startDate = null;
         Date endDate = null;
         try {
-            startDate = format.parse((!date.isEmpty() ? date : new SimpleDateFormat("yyyy-MM-dd").format(new Date())) + " " + (!startHour.isEmpty() ? startHour : "00:00"));
-            endDate = format.parse((!date.isEmpty() ? date : new SimpleDateFormat("yyyy-MM-dd").format(new Date())) + " " + (!endHour.isEmpty() ? endHour : "23:59"));
+            if (!date.isEmpty()) {
+                if (!startHour.isEmpty()) {
+                    startDate = format.parse(date + " " + startHour);
+                } else {
+                    startDate = format.parse(date + " " + "00:00");
+                }
+
+                if (!endHour.isEmpty()) {
+                    endDate = format.parse(date + " " + endHour);
+                } else {
+                    endDate = format.parse(date + " " + "23:59");
+                }
+            } else {
+                if (!startHour.isEmpty()) {
+                    startDate = format.parse(new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + " " + startHour);
+                }
+                if (!endHour.isEmpty()) {
+                    endDate = format.parse(new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + " " + endHour);
+                }
+            }
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+        SearchCoursesService scService = new SearchCoursesService();
+        scService.save(title, city, date, startHour, endHour);
 
         CourseSessionService cs = new CourseSessionService();
         List<CourseSession> courseSessions = cs.getCoursesSessions(title, city, startDate, endDate);
