@@ -10,10 +10,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link type="text/css" rel="stylesheet" href="bootstrap.css"/>
         <title>Search Log</title>
     </head>
     <body>
-    <h1>Liste des recherches efféctués</h1><br>
+        <div class="container">
+    <h1><center>Liste des recherches effectués</center></h1><br>
     <table style="width: 100%" border="1">
         <tr>
             <th>ID</th>
@@ -34,5 +36,7 @@
             </tr>            
         </c:forEach>
     </table>
+    <script src="bootstrap.js"></script>
+    </div>
 </body>
 </html>

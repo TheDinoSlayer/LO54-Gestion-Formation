@@ -9,9 +9,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link type="text/css" rel="stylesheet" href="bootstrap.css"/>
         <title>Inscription au cours</title>
     </head>
     <body>
+       <div class="container">
         <form action="/formation/addclient">
             Formation : <input type="text" value="${courseSession.course.title}" readonly/><br>
             Nom : <input type="text" name="lastname" required/><br>
@@ -21,5 +23,6 @@
             E-mail : <input type="email" name="email"/><br>
             <button type="submit" value="${courseSession.id}" name="course">Inscription</button><br>
         </form>
+        </div>
     </body>
 </html>
