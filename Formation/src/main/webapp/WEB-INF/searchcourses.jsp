@@ -27,7 +27,8 @@
                 </select><br>
                 Heure début : <input type="time" name="startHour"/><br>
                 Heure fin : <input type="time" name="endHour"/><br>
-                <input type="submit" value="Rechercher"/><br>
+               
+                <button class="btn" type="submit"><i class="icon-search icon-black"></i> Rechercher  </button>
             </form>
             <br>
             <table class="table table-striped" style="width: 100%" border="1">

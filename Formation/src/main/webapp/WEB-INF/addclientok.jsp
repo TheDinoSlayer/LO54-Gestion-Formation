@@ -9,9 +9,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link type="text/css" rel="stylesheet" href="bootstrap.css"/>
         <title>Inscription réussie</title>
     </head>
     <body>
+        <div class="container">
         ${client.firstName} ${client.lastName} a été enregistré dans ce cours :<br>
         ${client.courseSession.course.code}<br>
         ${client.courseSession.course.title}<br>
@@ -20,6 +22,7 @@
         ${client.courseSession.endDate}<br>
         <br>
         <a href="/formation/searchcourses">Rechercher un cours</a><br>
-        <a href="index.html">Revenir à l'accueil</a>        
+        <a href="index.html">Revenir à l'accueil</a> 
+        <div>
     </body>
 </html>
